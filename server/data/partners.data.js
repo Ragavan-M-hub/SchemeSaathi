@@ -1,0 +1,278 @@
+// server/data/partners.data.js
+// Seed source for `partners` and `partner_schemes`.
+//   SCA      = State Channelising Agency (state SC development corporations)
+//   PSB      = Public Sector Bank
+//   RRB      = Regional Rural Bank
+//   NBFC-MFI = Micro-Finance Institution
+//
+// `health` is derived from npaPercent by the seeder's own rule (see HEALTH_BANDS)
+// so the badge shown in the UI is always consistent with the underlying number.
+
+export const PARTNER_TYPE = {
+  SCA: "SCA",
+  PSB: "PSB",
+  RRB: "RRB",
+  NBFC_MFI: "NBFC-MFI",
+};
+
+export const HEALTH = {
+  HEALTHY: "Healthy",
+  CAUTION: "Caution",
+  HIGH_NPA: "High NPA",
+};
+
+/** NPA % thresholds, checked in order. Mirrors how lenders are graded in practice. */
+export const HEALTH_BANDS = [
+  { maxNpa: 5, health: HEALTH.HEALTHY },
+  { maxNpa: 9, health: HEALTH.CAUTION },
+  { maxNpa: Infinity, health: HEALTH.HIGH_NPA },
+];
+
+export const healthForNpa = (npaPercent) =>
+  HEALTH_BANDS.find((b) => npaPercent <= b.maxNpa).health;
+
+const ALL_SCHEMES = [
+  "micro-finance",
+  "term-loan",
+  "education-loan",
+  "mahila-samriddhi",
+  "skill-vocational",
+  "aajeevika",
+];
+
+export const partnerSeed = [
+  /* ---------- SCAs (State Channelising Agencies) ---------- */
+  {
+    id: "sca-up",
+    name: "UP SC Finance & Development Corporation",
+    type: PARTNER_TYPE.SCA,
+    city: "Lucknow",
+    state: "Uttar Pradesh",
+    lat: 26.8467,
+    lng: 80.9462,
+    npaPercent: 3.1,
+    avgProcessingDays: 28,
+    contact: "0522-2286091",
+    url: "https://upscfdc.up.nic.in",
+    schemes: ["micro-finance", "term-loan", "education-loan", "mahila-samriddhi", "skill-vocational"],
+  },
+  {
+    id: "sca-mp",
+    name: "MP SC Finance & Development Corporation",
+    type: PARTNER_TYPE.SCA,
+    city: "Bhopal",
+    state: "Madhya Pradesh",
+    lat: 23.2599,
+    lng: 77.4126,
+    npaPercent: 2.6,
+    avgProcessingDays: 24,
+    contact: "0755-2672222",
+    url: "https://mpscfdc.mp.gov.in",
+    schemes: ["micro-finance", "term-loan", "mahila-samriddhi", "aajeevika"],
+  },
+  {
+    id: "sca-mh",
+    name: "Maharashtra SC Finance & Development Corporation",
+    type: PARTNER_TYPE.SCA,
+    city: "Mumbai",
+    state: "Maharashtra",
+    lat: 19.076,
+    lng: 72.8777,
+    npaPercent: 2.2,
+    avgProcessingDays: 21,
+    contact: "022-26591701",
+    url: "https://mscfdc.maharashtra.gov.in",
+    schemes: ALL_SCHEMES,
+  },
+  {
+    id: "sca-tn",
+    name: "Tamil Nadu SC Development Corporation",
+    type: PARTNER_TYPE.SCA,
+    city: "Chennai",
+    state: "Tamil Nadu",
+    lat: 13.0827,
+    lng: 80.2707,
+    npaPercent: 7.4,
+    avgProcessingDays: 35,
+    contact: "044-28595255",
+    url: "https://sc.tn.gov.in",
+    schemes: ["micro-finance", "term-loan", "mahila-samriddhi", "skill-vocational"],
+  },
+  {
+    id: "sca-rj",
+    name: "Rajasthan SC Development & Finance Corporation",
+    type: PARTNER_TYPE.SCA,
+    city: "Jaipur",
+    state: "Rajasthan",
+    lat: 26.9124,
+    lng: 75.7873,
+    npaPercent: 4.0,
+    avgProcessingDays: 26,
+    contact: "0141-2741144",
+    url: "https://rscfdc.rajasthan.gov.in",
+    schemes: ["micro-finance", "term-loan", "education-loan", "mahila-samriddhi"],
+  },
+
+  /* ---------- PSBs (Public Sector Banks) ---------- */
+  {
+    id: "psb-sbi",
+    name: "State Bank of India",
+    type: PARTNER_TYPE.PSB,
+    city: "Mumbai (Pan-India)",
+    state: "All",
+    lat: 19.1176,
+    lng: 72.906,
+    npaPercent: 2.4,
+    avgProcessingDays: 18,
+    contact: "1800-11-2211",
+    url: "https://sbi.co.in",
+    schemes: ALL_SCHEMES,
+  },
+  {
+    id: "psb-pnb",
+    name: "Punjab National Bank",
+    type: PARTNER_TYPE.PSB,
+    city: "New Delhi (Pan-India)",
+    state: "All",
+    lat: 28.6139,
+    lng: 77.209,
+    npaPercent: 4.6,
+    avgProcessingDays: 22,
+    contact: "1800-180-2222",
+    url: "https://pnbindia.in",
+    schemes: ["micro-finance", "term-loan", "education-loan", "mahila-samriddhi"],
+  },
+  {
+    id: "psb-bob",
+    name: "Bank of Baroda",
+    type: PARTNER_TYPE.PSB,
+    city: "Vadodara (Pan-India)",
+    state: "All",
+    lat: 22.3072,
+    lng: 73.1812,
+    npaPercent: 6.8,
+    avgProcessingDays: 30,
+    contact: "1800-102-4455",
+    url: "https://bankofbaroda.in",
+    schemes: ["micro-finance", "term-loan", "mahila-samriddhi", "aajeevika"],
+  },
+
+  {
+    id: "psb-canara",
+    name: "Canara Bank",
+    type: PARTNER_TYPE.PSB,
+    city: "Bengaluru (Pan-India)",
+    state: "All",
+    lat: 12.9716,
+    lng: 77.5946,
+    npaPercent: 3.6,
+    avgProcessingDays: 20,
+    contact: "1800-425-0018",
+    url: "https://canarabank.com",
+    schemes: ["micro-finance", "term-loan", "education-loan", "skill-vocational"],
+  },
+  {
+    id: "psb-boi",
+    name: "Bank of India",
+    type: PARTNER_TYPE.PSB,
+    city: "Mumbai (Pan-India)",
+    state: "All",
+    lat: 18.9509,
+    lng: 72.8321,
+    npaPercent: 12.9,
+    avgProcessingDays: 48,
+    contact: "1800-103-8855",
+    url: "https://bankofindia.co.in",
+    schemes: ["micro-finance", "term-loan", "mahila-samriddhi"],
+  },
+
+  /* ---------- RRBs (Regional Rural Banks) ---------- */
+  {
+    id: "rrb-prathama",
+    name: "Prathama UP Gramin Bank",
+    type: PARTNER_TYPE.RRB,
+    city: "Moradabad",
+    state: "Uttar Pradesh",
+    lat: 28.8386,
+    lng: 78.7733,
+    npaPercent: 3.9,
+    avgProcessingDays: 25,
+    contact: "0591-2470222",
+    url: "https://prathamaupgraminbank.in",
+    schemes: ["micro-finance", "mahila-samriddhi", "aajeevika"],
+  },
+
+  {
+    id: "rrb-arya",
+    name: "Aryavart Bank",
+    type: PARTNER_TYPE.RRB,
+    city: "Lucknow",
+    state: "Uttar Pradesh",
+    lat: 26.85,
+    lng: 80.95,
+    npaPercent: 8.2,
+    avgProcessingDays: 33,
+    contact: "0522-4010000",
+    url: "https://aryavart.co.in",
+    schemes: ["micro-finance", "term-loan", "mahila-samriddhi"],
+  },
+  {
+    id: "rrb-dakshin",
+    name: "Karnataka Vikas Grameena Bank",
+    type: PARTNER_TYPE.RRB,
+    city: "Hubballi",
+    state: "Karnataka",
+    lat: 15.3647,
+    lng: 75.124,
+    npaPercent: 3.3,
+    avgProcessingDays: 23,
+    contact: "0836-2378888",
+    url: "https://kvgb.bank",
+    schemes: ["micro-finance", "mahila-samriddhi", "skill-vocational"],
+  },
+
+  /* ---------- NBFC-MFIs ---------- */
+  {
+    id: "mfi-spandana",
+    name: "Spandana Sphoorty Financial",
+    type: PARTNER_TYPE.NBFC_MFI,
+    city: "Vijayawada",
+    state: "Andhra Pradesh",
+    lat: 16.5062,
+    lng: 80.648,
+    npaPercent: 8.7,
+    avgProcessingDays: 15,
+    contact: "0866-2491111",
+    url: "https://spandanafinancial.com",
+    schemes: ["micro-finance", "mahila-samriddhi"],
+  },
+
+  {
+    id: "mfi-ujjivan",
+    name: "Ujjivan Small Finance Bank",
+    type: PARTNER_TYPE.NBFC_MFI,
+    city: "Bengaluru",
+    state: "Karnataka",
+    lat: 12.9716,
+    lng: 77.5946,
+    npaPercent: 2.9,
+    avgProcessingDays: 12,
+    contact: "1800-270-2233",
+    url: "https://ujjivansfb.in",
+    schemes: ["micro-finance", "mahila-samriddhi", "skill-vocational"],
+  },
+  {
+    id: "mfi-esaf",
+    name: "ESAF Small Finance Bank",
+    type: PARTNER_TYPE.NBFC_MFI,
+    city: "Thrissur",
+    state: "Kerala",
+    lat: 10.5276,
+    lng: 76.2144,
+    npaPercent: 4.4,
+    avgProcessingDays: 14,
+    contact: "0487-2427777",
+    url: "https://esafbank.com",
+    schemes: ["micro-finance", "mahila-samriddhi", "aajeevika"],
+  },
+];

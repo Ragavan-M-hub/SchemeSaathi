@@ -19,7 +19,6 @@ dist-ssr
 
 # SQLite database (created by `npm run db:seed`)
 /data/
-server/data/
 *.db
 *.db-shm
 *.db-wal
