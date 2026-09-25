@@ -18,7 +18,8 @@ dist-ssr
 !.env.example
 
 # SQLite database (created by `npm run db:seed`)
-data/
+/data/
+server/data/
 *.db
 *.db-shm
 *.db-wal
