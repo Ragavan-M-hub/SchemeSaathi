@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npm audit *)",
+      "Bash(npm run *)",
+      "Bash(npm test *)",
+      "Bash(taskkill //PID 9164 //F)",
+      "Bash(rm -f /tmp/a.jar /tmp/ss4000.log)",
+      "Bash(JWT_SECRET=smoketest-secret-0123456789 SERVE_CLIENT=1 NODE_ENV=production node server/index.js)",
+      "Read(//tmp/**)",
+      "Bash(curl -s http://localhost:4000/api/health)",
+      "Bash(curl -s -X POST http://localhost:4000/api/auth/login -H \"Content-Type: application/json\" -d '{\"email\":\"officer@example.com\",\"password\":\"demo1234\"}')",
+      "Bash(curl -s -X POST http://localhost:4000/api/emi/calculate -H \"Content-Type: application/json\" -d '{\"principal\":100000,\"annualRate\":12,\"tenureYears\":1,\"moratoriumMonths\":0,\"includeSchedule\":false}')",
+      "Bash(curl -s http://localhost:4000/dashboard)",
+      "Bash(rmdir src/utils)",
+      "Bash(npx eslint *)"
+    ]
+  }
+}
